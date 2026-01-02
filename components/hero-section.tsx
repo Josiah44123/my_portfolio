@@ -255,7 +255,8 @@ export function HeroSection() {
         {/* UPDATED BUTTON GROUP */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="/cv?download=true"
+            href="/images/CV.pdf" // CHANGED: Pointing to file
+            download="Josiah_Lamuel_Rosell_CV.pdf" // ADDED: Forces download with name
             target="_blank"
             rel="noopener noreferrer"
             className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-xl font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:glow flex items-center justify-center gap-2"
