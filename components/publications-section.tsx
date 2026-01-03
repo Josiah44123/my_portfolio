@@ -47,7 +47,7 @@ export function PublicationsSection() {
               ))}
             </div>
           </CardContent>
-          <CardFooter className="bg-primary/5 pt-6">
+          <CardFooter className="bg-primary/5 pt-1">
             <Button asChild className="w-full sm:w-auto">
               <a href={publication.link} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-2" />
