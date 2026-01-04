@@ -5,18 +5,28 @@ import { ExternalLink, Github, Layers, Monitor, Database } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const projects = [
- {
+  {
     title: "Productivity Hub",
     description:
       "A high-performance personal dashboard featuring real-time task tracking, dynamic progress visualization, and integrated resource management tools.",
     tags: ["React", "Node.js", "PostgreSQL", "Tailwind CSS"],
-    github: "https://github.com/Josiah44123/v1productivity-app", // Add your repo link here
-    demo: "https://personalizedproductivityhub.vercel.app",   // Add your hosted link here
+    github: "https://github.com/Josiah44123/v1productivity-app",
+    demo: "https://personalizedproductivityhub.vercel.app",
     category: "Web App",
     icon: <Layers className="w-6 h-6" />,
-    color: "from-orange-500 to-rose-500", // Matches the 'Productivity Hub' logo colors
+    color: "from-orange-500 to-rose-500",
   },
- 
+  {
+    title: "Advanced Banking System",
+    description:
+      "A robust terminal-based banking simulation demonstrating core OOP principles. Features secure user authentication, polymorphic transaction handling, admin dashboards, and file-based data persistence.",
+    tags: ["Java", "OOP", "File Handling", "CLI"],
+    github: "https://github.com/Josiah44123/C2A-OOProg-Finals",
+    demo: "https://github.com/Josiah44123/C2A-OOProg-Finals", // Linked to repo as it is a CLI app
+    category: "Software",
+    icon: <Database className="w-6 h-6" />,
+    color: "from-blue-600 to-cyan-500", 
+  },
 ]
 
 export function ProjectsSection() {
@@ -92,12 +102,16 @@ export function ProjectsSection() {
                 <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/5">
                   <a
                     href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors"
                   >
                     <Github className="w-4 h-4" /> Code
                   </a>
                   <a
                     href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" /> Live Demo
