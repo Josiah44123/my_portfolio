@@ -9,7 +9,7 @@ const projects = [
     title: "Productivity Hub",
     description:
       "A high-performance personal dashboard featuring real-time task tracking, dynamic progress visualization, and integrated resource management tools.",
-    tags: ["React", "Node.js", "PostgreSQL", "Tailwind CSS"],
+    tags: ["React", "Node.js", "Tailwind CSS"],
     github: "https://github.com/Josiah44123/v1productivity-app",
     demo: "https://personalizedproductivityhub.vercel.app",
     category: "Web App",
