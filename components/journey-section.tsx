@@ -57,11 +57,11 @@ const timelineData: TimelineItem[] = [
     location: "De La Salle Lipa",
     period: "Jun 2025 – Present",
     description:
-      "Leading external partnerships and organizational communication for the university's premier computer science organization.",
+      "Leading external  and organizational communication for the university's premier computer science organization.",
     details: [
-      "Leads external partnerships and organizational communication",
+      "Leads external organizational communication for projects and events",
       "Applies project management for events, collaborations, and planning",
-      "Works closely with internal and external stakeholders",
+      "Works closely with internal and external officials",
       "Coordinates with other university organizations and industry partners",
     ],
     icon: Briefcase,
