@@ -50,7 +50,7 @@ export function ContactSection() {
           </h2>
           <div className="w-20 h-1 bg-primary rounded-full mb-4" />
           <p className="text-muted-foreground mb-8 max-w-2xl">
-            I&apos;m always open to discussing new opportunities, collaborations, or just having a friendly chat about
+            I&apos;m always open to discussing new opportunities, collaborations, or just having a chat about
             technology and innovation.
           </p>
           <div className="grid sm:grid-cols-2 gap-4 mb-8">
