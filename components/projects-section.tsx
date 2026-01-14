@@ -5,17 +5,7 @@ import { ExternalLink, Github, Layers, Database, Network, Palette, Code } from "
 import { cn } from "@/lib/utils"
 
 const projects = [
-  {
-    title: "Java Output Challenge",
-    description:
-      "An interactive quiz game featuring 'Classic' and 'Event' modes. Challenges developers to predict Java code outputs with dynamic question generation, real-time scoring, and IDE-inspired syntax highlighting.",
-    tags: ["React 19", "Next.js 16", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/Josiah44123/java-output-challenge", // Placeholder based on your pattern
-    demo: "https://java-output-challenge.vercel.app", // Placeholder
-    category: "Web App",
-    icon: <Code className="w-6 h-6" />,
-    color: "from-emerald-500 to-teal-500",
-  },
+  
   {
     title: "Productivity Hub",
     description:
@@ -26,6 +16,17 @@ const projects = [
     category: "Web App",
     icon: <Layers className="w-6 h-6" />,
     color: "from-orange-500 to-rose-500",
+  },
+  {
+    title: "Java Output Challenge",
+    description:
+      "An interactive quiz game featuring 'Classic' and 'Event' modes. Challenges developers to predict Java code outputs with dynamic question generation, real-time scoring, and IDE-inspired syntax highlighting.",
+    tags: ["React 19", "Next.js 16", "TypeScript", "Tailwind CSS"],
+    github: "https://github.com/Josiah44123/java-output-game", 
+    demo: "https://java-output-game.vercel.app", 
+    category: "Web App",
+    icon: <Code className="w-6 h-6" />,
+    color: "from-emerald-500 to-teal-500",
   },
   {
     title: "Advanced Banking System",
