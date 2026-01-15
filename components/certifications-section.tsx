@@ -17,6 +17,17 @@ import {
 
 const certifications = [
   {
+    title: "Introduction Data Science",
+    issuer: "Cisco Networking Academy",
+    date: "Issued January 2026",
+    credentialId: "N/A",
+    credentialUrl: "https://www.credly.com/badges/2bf72180-b1e8-4f4c-a71e-1152a3579dcf/public_url",
+    skills: ["Data Science", "Data Analysis", "Data Visualization"],
+    icon: Wallet,
+    gradient: "from-blue-600 to-indigo-600",
+  },
+  {
+    
     title: "Essentials of Property Management Work",
     issuer: "Alison",
     date: "Issued Nov 2025",
