@@ -1,11 +1,21 @@
 "use client"
 
 import { useState } from "react"
-import { ExternalLink, Github, Layers, Database, Network, Palette, Code } from "lucide-react"
+import { ExternalLink, Github, Layers, Database, Network, Palette, Code, Gamepad2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const projects = [
-  
+  {
+    title: "Chick Stacker",
+    description:
+      "A custom arcade game engine built with HTML5 Canvas and Next.js App Router. This project marks my first full integration of Supabase, utilizing it to engineer a secure, real-time leaderboard system via dedicated API routes.",
+    tags: ["Next.js App Router", "Canvas API", "Supabase", "TypeScript"],
+    github: "https://github.com/Josiah44123/stacking-game", 
+    demo: "https://chickstack.vercel.app", 
+    category: "Web App",
+    icon: <Gamepad2 className="w-6 h-6" />,
+    color: "from-amber-400 to-orange-500",
+  },
   {
     title: "Productivity Hub",
     description:
