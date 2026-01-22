@@ -18,7 +18,7 @@ import {
 const certifications = [
   {
     title: "Introduction Data Science",
-    issuer: "Cisco Networking Academy",
+    issuer: "C  isco Networking Academy",
     date: "Issued January 2026",
     credentialId: "N/A",
     credentialUrl: "https://www.credly.com/badges/2bf72180-b1e8-4f4c-a71e-1152a3579dcf/public_url",
