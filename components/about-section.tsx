@@ -72,13 +72,13 @@ export function AboutSection() {
             {[
               {
                 icon: User,
-                title: "People-First",
+                title: "Solution Focused",
                 description: "Creating tools that genuinely help users",
               },
               {
                 icon: Code,
                 title: "Craftsmanship",
-                description: "Writing clean, maintainable code",
+                description: "Writing, maintainable code",
               },
               {
                 icon: Lightbulb,
