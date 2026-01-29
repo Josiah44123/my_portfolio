@@ -1,9 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useInView } from "@/hooks/use-in-view"
-import { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef, useMemo } from "react"
 import {
   Code2,
   Presentation,
@@ -20,161 +17,121 @@ import {
   Palette,
   Bot,
   BrainCircuit,
+  Cpu,
 } from "lucide-react"
 
+// --- Data ---
 const skillCategories = [
   {
     name: "Technical",
+    icon: Code2,
     skills: [
       { name: "Java", level: 85, icon: Code2, gradient: "from-orange-500 to-red-500" },
-      { name: "Programming", level: 80, icon: Code2, gradient: "from-blue-500 to-indigo-500" },
-      { name: "Research Skills", level: 85, icon: Search, gradient: "from-green-500 to-emerald-500" },
+      { name: "Programming", level: 80, icon: Cpu, gradient: "from-blue-500 to-indigo-500" },
+      { name: "Research", level: 85, icon: Search, gradient: "from-green-500 to-emerald-500" },
       { name: "Design", level: 75, icon: Palette, gradient: "from-pink-500 to-rose-500" },
     ],
   },
   {
     name: "Leadership",
+    icon: Award,
     skills: [
-      { name: "Project Management", level: 80, icon: FolderKanban, gradient: "from-blue-500 to-cyan-500" },
-      { name: "Student Leadership", level: 88, icon: Award, gradient: "from-yellow-500 to-orange-500" },
+      { name: "Project Mgmt", level: 80, icon: FolderKanban, gradient: "from-blue-500 to-cyan-500" },
+      { name: "Student Lead.", level: 88, icon: Award, gradient: "from-yellow-500 to-orange-500" },
       { name: "Presentations", level: 90, icon: Presentation, gradient: "from-purple-500 to-pink-500" },
-      { name: "New Business Development", level: 75, icon: Rocket, gradient: "from-teal-500 to-green-500" },
+      { name: "Biz Dev", level: 75, icon: Rocket, gradient: "from-teal-500 to-green-500" },
     ],
   },
   {
     name: "Business",
+    icon: Building2,
     skills: [
-      { name: "Property Management", level: 78, icon: Building2, gradient: "from-slate-500 to-gray-600" },
+      { name: "Property Mgmt", level: 78, icon: Building2, gradient: "from-slate-500 to-gray-600" },
       { name: "Real Estate", level: 75, icon: Home, gradient: "from-amber-500 to-yellow-500" },
       { name: "Finance", level: 72, icon: Wallet, gradient: "from-emerald-500 to-teal-500" },
-      { name: "Vehicle Maintenance", level: 70, icon: Wrench, gradient: "from-zinc-500 to-stone-600" },
+      { name: "Maintenance", level: 70, icon: Wrench, gradient: "from-zinc-500 to-stone-600" },
     ],
   },
   {
     name: "Marketing & AI",
+    icon: BrainCircuit,
     skills: [
-      { name: "Creative Strategy", level: 82, icon: Lightbulb, gradient: "from-yellow-400 to-orange-500" },
+      { name: "Creative Strat.", level: 82, icon: Lightbulb, gradient: "from-yellow-400 to-orange-500" },
       { name: "Advertising", level: 80, icon: Megaphone, gradient: "from-red-500 to-pink-500" },
-      { name: "Artificial Intelligence", level: 78, icon: Bot, gradient: "from-violet-500 to-purple-500" },
-      { name: "Generative AI for Leadership", level: 76, icon: BrainCircuit, gradient: "from-cyan-500 to-blue-500" },
+      { name: "Artificial Intel.", level: 78, icon: Bot, gradient: "from-violet-500 to-purple-500" },
+      { name: "Gen AI Leadership", level: 76, icon: BrainCircuit, gradient: "from-cyan-500 to-blue-500" },
     ],
   },
 ]
 
-const topSkills = [
-  { name: "Presentations", gradient: "from-purple-500 to-pink-500" },
-  { name: "Student Leadership", gradient: "from-yellow-500 to-orange-500" },
-  { name: "Java", gradient: "from-orange-500 to-red-500" },
-  { name: "Research", gradient: "from-green-500 to-emerald-500" },
-  { name: "Creative Strategy", gradient: "from-yellow-400 to-orange-500" },
-]
 
-function FloatingBinarySkills({ id }: { id: number }) {
-  const initialX = useRef(Math.random() * 100)
-  const initialY = useRef(Math.random() * 100)
-  const speed = useRef(0.2 + Math.random() * 0.15)
-  const char = useRef(Math.random() > 0.5 ? "1" : "0")
-  const size = useRef(8 + Math.random() * 4)
-
-  const [pos, setPos] = useState({ x: initialX.current, y: initialY.current })
-
-  useEffect(() => {
-    const animate = () => {
-      setPos((prev) => {
-        let newY = prev.y - speed.current
-        if (newY < -5) {
-          newY = 105
-          initialX.current = Math.random() * 100
-        }
-        return { x: initialX.current, y: newY }
-      })
-    }
-
-    const interval = setInterval(animate, 50)
-    return () => clearInterval(interval)
-  }, [])
-
+function BinaryParticle({ style }: { style: React.CSSProperties }) {
   return (
     <div
-      className="absolute font-mono text-primary/20 pointer-events-none select-none"
-      style={{
-        left: `${pos.x}%`,
-        top: `${pos.y}%`,
-        fontSize: size.current,
-        transform: "translate(-50%, -50%)",
-      }}
+      className="absolute font-mono text-primary/10 select-none pointer-events-none animate-float-up"
+      style={style}
     >
-      {char.current}
+      {Math.random() > 0.5 ? "1" : "0"}
     </div>
   )
 }
 
-function SkillBar({
+function SkillCard({
   name,
   level,
-  delay,
   icon: Icon,
   gradient,
+  index,
 }: {
   name: string
   level: number
-  delay: number
   icon: React.ElementType
   gradient: string
+  index: number
 }) {
-  const [animated, setAnimated] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
-  const { ref, isInView } = useInView()
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
-    if (isInView) {
-      const timer = setTimeout(() => setAnimated(true), delay)
-      return () => clearTimeout(timer)
-    }
-  }, [isInView, delay])
+    
+    const timer = setTimeout(() => setShow(true), index * 100)
+    return () => clearTimeout(timer)
+  }, [index])
 
   return (
     <div
-      ref={ref}
-      className="mb-6 group cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={`group relative bg-white/5 dark:bg-black/20 backdrop-blur-sm border border-white/10 rounded-xl p-4 hover:border-white/20 transition-all duration-500 transform ${
+        show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
     >
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-3">
-          <div
-            className={`p-2 rounded-lg transition-all duration-300 ${
-              isHovered ? `bg-gradient-to-br ${gradient} text-white scale-110` : "bg-secondary text-muted-foreground"
-            }`}
-          >
-            <Icon className="w-4 h-4" />
-          </div>
-          <span className={`font-medium transition-colors duration-300 ${isHovered ? "text-foreground" : ""}`}>
-            {name}
-          </span>
-        </div>
-        <span
-          className={`font-mono text-sm transition-all duration-300 ${
-            isHovered ? "text-foreground scale-110" : "text-primary"
-          }`}
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-4">
+        <div
+          className={`p-2.5 rounded-lg bg-gradient-to-br ${gradient} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
         >
-          {animated ? level : 0}%
-        </span>
+          <Icon className="w-5 h-5" />
+        </div>
+        <div>
+          <h4 className="font-medium text-foreground group-hover:text-primary transition-colors">
+            {name}
+          </h4>
+          <p className="text-xs text-muted-foreground font-mono">Proficiency: {level}%</p>
+        </div>
       </div>
-      <div className="h-3 bg-secondary rounded-full overflow-hidden relative">
+
+      {/* Progress Bar */}
+      <div className="h-2 bg-secondary/50 rounded-full overflow-hidden relative">
         <div
           className={`h-full bg-gradient-to-r ${gradient} rounded-full transition-all duration-1000 ease-out relative`}
-          style={{ width: animated ? `${level}%` : "0%" }}
+          style={{ width: show ? `${level}%` : "0%" }}
         >
-          <div
-            className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-opacity duration-300 ${
-              isHovered ? "opacity-100 animate-shimmer" : "opacity-0"
-            }`}
-          />
+          {/* Shimmer Effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] group-hover:animate-shimmer" />
         </div>
+        
+        {/* Glow under the bar */}
         <div
-          className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${gradient} blur-sm transition-all duration-1000 ease-out`}
-          style={{ width: animated ? `${level}%` : "0%", opacity: isHovered ? 0.8 : 0.4 }}
+          className={`absolute top-0 left-0 h-full w-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-gradient-to-r ${gradient}`}
+          style={{ width: `${level}%` }}
         />
       </div>
     </div>
@@ -182,77 +139,108 @@ function SkillBar({
 }
 
 export function SkillsSection() {
-  const { ref, isInView } = useInView()
-  const [mounted, setMounted] = useState(false)
   const [activeTab, setActiveTab] = useState(0)
-  const floatingParticles = Array.from({ length: 15 }, (_, i) => i)
+  const [mounted, setMounted] = useState(false)
+  
+  // Create static particles on mount only
+  const particles = useMemo(() => {
+    return Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      style: {
+        left: `${Math.random() * 100}%`,
+        fontSize: `${Math.random() * 1.5 + 0.5}rem`,
+        animationDuration: `${Math.random() * 10 + 10}s`,
+        animationDelay: `-${Math.random() * 10}s`,
+      } as React.CSSProperties,
+    }))
+  }, [])
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   return (
-    <section id="skills" className="py-20 px-4 bg-secondary/30 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        {mounted && floatingParticles.map((id) => <FloatingBinarySkills key={id} id={id} />)}
+    <section id="skills" className="py-24 px-4 relative overflow-hidden bg-background">
+      {/* CSS-based Background Animation */}
+      <style jsx global>{`
+        @keyframes float-up {
+          0% { transform: translateY(110vh); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(-10vh); opacity: 0; }
+        }
+        .animate-float-up {
+          animation-name: float-up;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          bottom: -20px;
+        }
+        @keyframes shimmer {
+          100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+          animation: shimmer 1.5s infinite;
+        }
+      `}</style>
+
+      {/* Background Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {mounted && particles.map((p) => <BinaryParticle key={p.id} style={p.style} />)}
       </div>
 
-      <div className="container mx-auto max-w-4xl relative z-10">
-        <div
-          ref={ref}
-          className={`transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-accent">
-              <Code2 className="w-6 h-6 text-white" />
-            </div>
-            Skills
+      <div className="container mx-auto max-w-5xl relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            <Code2 className="w-4 h-4" />
+            <span>Expertise & Stack</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/70">
+            Technical Proficiency
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent rounded-full mb-4" />
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            A diverse skillset spanning software engineering, leadership, and modern AI strategies.
+          </p>
+        </div>
 
-          <div className="flex flex-wrap gap-2 mb-8">
-            <span className="text-sm text-muted-foreground mr-2">Top:</span>
-            {topSkills.map((skill) => (
-              <span
-                key={skill.name}
-                className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${skill.gradient} text-white font-medium`}
-              >
-                {skill.name}
-              </span>
-            ))}
+        {/* Tab Navigation (Pill Style) */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="bg-secondary/50 p-1.5 rounded-2xl inline-flex flex-wrap justify-center gap-2 backdrop-blur-sm border border-border/50">
+            {skillCategories.map((category, index) => {
+              const isActive = activeTab === index
+              const Icon = category.icon
+              return (
+                <button
+                  key={category.name}
+                  onClick={() => setActiveTab(index)}
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    isActive
+                      ? "bg-background text-foreground shadow-sm ring-1 ring-black/5 dark:ring-white/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+                  }`}
+                >
+                  <Icon className={`w-4 h-4 ${isActive ? "text-primary" : ""}`} />
+                  {category.name}
+                </button>
+              )
+            })}
           </div>
+        </div>
 
-          <div className="flex flex-wrap gap-2 mb-6">
-            {skillCategories.map((category, index) => (
-              <button
-                key={category.name}
-                onClick={() => setActiveTab(index)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  activeTab === index
-                    ? "bg-gradient-to-r from-primary to-accent text-white"
-                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-
-          <div className="glass rounded-2xl p-6 md:p-8">
+        {/* Skills Grid */}
+        <div className="min-h-[400px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {skillCategories[activeTab].skills.map((skill, index) => (
-              <SkillBar
-                key={skill.name}
-                name={skill.name}
-                level={skill.level}
-                delay={index * 150}
-                icon={skill.icon}
-                gradient={skill.gradient}
+              <SkillCard
+                key={`${activeTab}-${skill.name}`} // Force re-render on tab change for animation
+                index={index}
+                {...skill}
               />
             ))}
           </div>
         </div>
+
       </div>
     </section>
   )
