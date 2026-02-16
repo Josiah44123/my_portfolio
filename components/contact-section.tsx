@@ -28,7 +28,7 @@ const contactLinks = [
     icon: Github,
     label: "GitHub",
     value: "View my projects",
-    href: "https://github.com/Josiah44123/portfolio",
+    href: "https://github.com/Josiah44123",
     color: "from-gray-500 to-gray-700",
   },
 ]
