@@ -14,6 +14,7 @@ import {
   Code2,
   Wallet,
   Database,
+  Cpu, 
 } from "lucide-react"
 
 type Category = "Data & AI" | "Business & Management" | "Development"
@@ -66,7 +67,18 @@ const certifications = [
     category: "Data & AI",
   },
 
-  // --- Development ---
+ 
+  {
+    title: "Introduction to IoT and Digital Transformation",
+    issuer: "Cisco Networking Academy",
+    date: "Issued Feb 2026",
+    credentialId: "N/A",
+    credentialUrl: "https://www.credly.com/badges/8a19a22c-93f5-41ff-b0f1-35a1929a19c0",
+    skills: ["IoT", "Networking", "Digital Transformation"],
+    icon: Cpu,
+    gradient: "from-cyan-500 to-blue-500",
+    category: "Development",
+  },
   {
     title: "DLSL – Java Programming 1",
     issuer: "CodeChum",
@@ -79,7 +91,7 @@ const certifications = [
     category: "Development",
   },
 
-  // --- Business & Management ---
+  
   {
     title: "Essentials of Property Management Work",
     issuer: "Alison",
@@ -152,7 +164,7 @@ const certifications = [
 export function CertificationsSection() {
   const { ref, isInView } = useInView()
 
-  // Group certifications by category
+  // by category
   const categories: Record<Category, typeof certifications> = {
     "Data & AI": certifications.filter((c) => c.category === "Data & AI"),
     "Development": certifications.filter((c) => c.category === "Development"),
