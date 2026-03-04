@@ -19,8 +19,13 @@ export function Navbar() {
   const { theme, setTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  
+  // --- ADDED THIS ---
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true) // Set to true after the component mounts on the client
+    
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
     }
@@ -58,10 +63,17 @@ export function Navbar() {
           {/* Theme Toggle */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-full glass hover:glow-sm transition-all duration-300"
+            className="p-2 rounded-full glass hover:glow-sm transition-all duration-300 min-w-[40px] min-h-[40px] flex items-center justify-center"
             aria-label="Toggle theme"
           >
-            {theme === "dark" ? <Sun className="w-5 h-5 text-primary" /> : <Moon className="w-5 h-5 text-primary" />}
+            {/* --- UPDATED LOGIC HERE --- */}
+            {!mounted ? (
+              <div className="w-5 h-5" /> // Empty placeholder to match server/client initial render
+            ) : theme === "dark" ? (
+              <Sun className="w-5 h-5 text-primary" />
+            ) : (
+              <Moon className="w-5 h-5 text-primary" />
+            )}
           </button>
 
           {/* Mobile Menu Toggle */}
