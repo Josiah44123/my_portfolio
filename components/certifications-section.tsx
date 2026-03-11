@@ -30,7 +30,7 @@ const certifications = [
     skills: ["Project Management", "Agile"],
     icon: FolderKanban,
     gradient: "from-blue-500 to-cyan-500",
-    category: "Project Management", // Updated category
+    category: "Project Management",  
   },
   {
     title: "Essentials of Property Management Work",
@@ -42,7 +42,7 @@ const certifications = [
     badge: "CPD Certified",
     icon: Building2,
     gradient: "from-slate-500 to-gray-600",
-    category: "Project Management", // Updated category
+    category: "Project Management",  
   },
 
   // --- IOT ---
@@ -55,7 +55,7 @@ const certifications = [
     skills: ["IoT", "Networking", "Digital Transformation"],
     icon: Cpu,
     gradient: "from-cyan-500 to-blue-500",
-    category: "Internet of Things (IoT)", // Updated category
+    category: "Internet of Things (IoT)",  
   },
 
   // --- DATA & AI ---
