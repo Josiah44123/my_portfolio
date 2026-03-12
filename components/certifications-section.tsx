@@ -20,6 +20,7 @@ import {
 type Category = "Project Management" | "Internet of Things (IoT)" | "Data & AI" | "Development" | "Business & Management"
 
 const certifications = [
+  // --- GENERAL ---
   // --- PROJECT MANAGEMENT ---
   {
     title: "Project Management Foundations",
