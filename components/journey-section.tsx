@@ -42,10 +42,10 @@ const timelineData: TimelineItem[] = [
   {
     id: "dlsl-dl-running",
     type: "award",
-    title: "Dean's Lister Candidate (Running)",
+    title: "Dean's Lister - 3rd Honors",
     organization: "De La Salle Lipa",
     period: "1st Sem, A.Y. 2025-2026",
-    description: "Currently maintaining academic standing for Dean's List honors for the first semester of the second year.",
+    description: "Achieved Third Honors distinction during the first semester of the second year.",
     icon: Star,
     gradient: "from-blue-500 to-indigo-500",
   },
