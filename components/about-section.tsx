@@ -24,7 +24,6 @@ export function AboutSection() {
           <div className="glass rounded-2xl p-6 md:p-8">
             
             {/* --- BLOCK 1: TOP ROW (Photo + First Paragraph) --- */}
-            {/* This flex container forces the text to stay next to the photo */}
             <div className="flex flex-col md:flex-row gap-8 items-start mb-6">
               
               {/* Photo Column */}
@@ -38,8 +37,7 @@ export function AboutSection() {
                 </div>
               </div>
 
-              {/* Text Column (First Paragraph Only) */}
-              {/* 'flex-1' makes this fill the remaining width perfectly */}
+             
               <div className="flex-1">
                 <p className="text-muted-foreground leading-relaxed text-lg mb-3 text-justify">
                   I am a Computer Science student at De La Salle Lipa; passionate
@@ -52,7 +50,7 @@ export function AboutSection() {
             </div>
 
             {/* --- BLOCK 2: BOTTOM ROW (Rest of the content) --- */}
-            {/* This sits naturally below the Flex container above */}
+          
             <div className="text-muted-foreground leading-relaxed text-lg">
               <p className="mb-4 text-justify">
                 I believe technology isn&apos;t just about code — it&apos;s about creating tools that can help people, tell

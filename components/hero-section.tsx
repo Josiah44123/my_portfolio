@@ -243,7 +243,7 @@ export function HeroSection() {
 
         <div className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 h-8">
           <TypeWriter
-            texts={["Computer Science Student", "Aspiring Software Developer", "Tech Enthusiast", "Problem Solver"]}
+            texts={["Computer Science Undergraduate", "Aspiring Software Developer", "Tech Enthusiast", "Lifelong Learner"]}
             className="font-medium"
           />
         </div>

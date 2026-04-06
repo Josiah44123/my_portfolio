@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     "Computer Science student at De La Salle Lipa passionate about software development, digital solutions, and communication-focused technologies.",
   generator: 'v0.app',
-  // Simplified icons configuration
+  
   icons: {
     icon: "/images/icon.svg",
     apple: "/images/icon.svg",
